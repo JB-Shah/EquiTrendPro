@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script
+      src="https://kit.fontawesome.com/fef1043eff.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google font styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #aedff7;
+        /* background-color: #1E1E1E; */
+      }
+      #sidebar {
+        background: #ffffff;
+        /* background-color: #2B2B2B; */
+        grid-area: sidebar;
+        overflow-y: auto;
+        width: 300px;
+        height: 97vh;
+        transition: all 0.5s;
+        border-radius: 20px;
+        font-family: "Poppins", sans-serif;
+        padding-left: 10px;
+        box-shadow: 10px 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .sidebar__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* color: #333333; */
+        margin-bottom: 30px;
+        color: #2b3674;
+        margin-left: 22px;
+        /* background: linear-gradient(45deg, #4318FF, #FF1843);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent; */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        margin-top: 25px;
+        background-color: #aedff7;
+        padding-left: 5px;
+      }
+
+      .sidebar__title > div > h1 {
+        font-size: 26pt;
+        display: inline;
+        text-decoration-thickness: 10px;
+        letter-spacing: 3px;
+      }
+
+      .sidebar__title > i {
+        font-size: 18px;
+        display: none;
+      }
+
+      .sidebar__menu > h2 {
+        color: #2b3674;
+        /* color: #FFFFFF; */
+        font-size: 16px;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        padding: 0 10px;
+        font-weight: 700;
+      }
+
+      .sidebar__link {
+        color: #a3aed0;
+        /* color: #A3BED0; */
+        padding: 10px;
+        border-radius: 3px;
+        margin-bottom: 5px;
+      }
+
+      .active_menu_link a:hover {
+        color: #2b3674;
+        /* color: #FFFFFF; */
+      }
+
+      .active_menu_link a {
+        color: #2b3674 !important;
+        /* color: #FFFFFF; */
+      }
+
+      .sidebar__link > a {
+        text-decoration: none;
+        color: #a3aed0;
+        /* color: #A3BED0; */
+        font-weight: 700;
+        font-size: 20px;
+      }
+      .sidebar__link > a:hover {
+        text-decoration: none;
+        color: #2b3674;
+        /* color: #FFFFFF; */
+        font-weight: 700;
+      }
+      .sidebar__link > i {
+        margin-right: 10px;
+        font-size: 26px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="sidebar">
+      <div class="sidebar__title">
+        <div class="sidebar__img">
+          <h1>Stock Filter</h1>
+        </div>
+      </div>
+      <div class="sidebar__menu">
+        <div class="sidebar__link">
+          <i class="fa fa-home"></i>
+          <a href="/Home">Home</a>
+        </div>
+        <div class="sidebar__link">
+          <i class="fa-solid fa-bullseye"></i>
+          <a href="/Strategy_Testing/main/search^none">Strategy Testing</a>
+        </div>
+        <div class="sidebar__link">
+          <i class="fa-solid fa-newspaper"></i>
+          <a href="/SIN">Stocks in News</a>
+        </div>
+        <div class="sidebar__link">
+          <i class="fa-solid fa-money-check"></i>
+          <a href="/IPO">IPO</a>
+        </div>
+        <div class="sidebar__link">
+          <i class="fa-solid fa-arrow-trend-up"></i>
+          <a href="/virtual_trade/all">Virtual Trade</a>
+        </div>
+        <div class="sidebar__link">
+          <i class="fa-solid fa-envelope"></i>
+          <a href="/portfolio">Portfolio</a>
+        </div>
+        <div class="sidebar__link">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <a href="#">Sign In</a>
+        </div>
+        <div class="sidebar__link">
+          <i class="fa-solid fa-address-card"></i>
+          <a href="/About">About US</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

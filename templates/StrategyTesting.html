@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--  Font awesome -->
+    <script
+      src="https://kit.fontawesome.com/fef1043eff.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google font styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <title>Strategy Testing</title>
+
+    <style>
+      .container {
+        display: grid;
+        grid-template-rows: 100px auto auto auto;
+        grid-template-columns: auto auto auto auto;
+        column-gap: 10px;
+        row-gap: 2px;
+        width: fit-content;
+        font-family: "Poppins", sans-serif;
+      }
+      .sidebar {
+        grid-row-start: 1;
+        grid-row-end: 5;
+        grid-column-start: 1;
+        grid-column-end: 2;
+      }
+      .navbar-home {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 2;
+        grid-column-end: 4;
+      }
+      .stocklist-container {
+        background-color: white;
+        /* background-color:#1E1E1E; */
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.21),
+          -2px -2px 6px rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        margin-left: 15px;
+        grid-row-start: 2;
+        grid-row-end: 5;
+        grid-column-start: 2;
+        grid-column-end: 4;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+      .sub-heading{
+        height: 30px;
+        font-size: 20px;
+        color: #a3aed0;
+        padding-left: 20px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">{% include 'Sidebar.html' %}</div>
+      <div class="navbar-home">{% include 'Navbar.html'%}</div>
+      <div class="stocklist-container">
+        <div class="sub-heading">
+          {{ number_of_stocks}} results
+        </div>
+        {{table|safe}}
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--  Font awesome -->
+    <script
+      src="https://kit.fontawesome.com/fef1043eff.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google font styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <title>About</title>
+
+    <style>
+      .container {
+        display: grid;
+        grid-template-rows: 100px auto auto auto;
+        grid-template-columns: auto auto auto auto;
+        column-gap: 10px;
+        row-gap: 2px;
+        width: fit-content;
+        font-family: "Poppins", sans-serif;
+      }
+      .sidebar {
+        grid-row-start: 1;
+        grid-row-end: 5;
+        grid-column-start: 1;
+        grid-column-end: 2;
+      }
+      .navbar-home {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 2;
+        grid-column-end: 4;
+      }
+      .about-container {
+        background-color: white;
+        /* background-color: #2B2B2B; */
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.21),
+          -2px -2px 6px rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        margin-left: 15px;
+        grid-row-start: 2;
+        grid-row-end: 5;
+        grid-column-start: 2;
+        grid-column-end: 4;
+        padding-left: 15px;
+      }
+      .about-container-content {
+        height: 514px;
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+      }
+      h1,
+      h2,
+      h3,
+      strong {
+        color: #2b3674;
+        /* color: #FFFFFF; */
+      }
+      p,
+      li {
+        color: #a3aed0;
+        /* color: #A3BED0; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">{% include 'Sidebar.html' %}</div>
+      <div class="navbar-home">{% include 'Navbar.html'%}</div>
+      <div class="about-container">
+        <header>
+          <h1>Welcome to StockGrow</h1>
+          <hr>
+        </header>
+        <div class="about-container-content">
+          <section id="section1">
+            <h2>What We Provide</h2>
+            <p>
+              Discover your winning strategies with StockGrow. We offer powerful
+              tools and resources to help you make informed investment
+              decisions, whether you're a seasoned trader or just starting.
+            </p>
+          </section>
+
+          <section id="section2">
+            <h2>Elaborating the Techniques</h2>
+
+            <h3>1. Strategy Testing</h3>
+            <p>
+              Unleash the power of data-driven decision-making with our strategy
+              testing feature. We offer a range of technical and fundamental
+              strategies to analyze stocks:
+            </p>
+            <ul>
+              <li>
+                <strong>RSI 14 (Relative Strength Index):</strong> Understand
+                how this momentum oscillator can identify overbought and
+                oversold conditions in a stock. We provide detailed RSI analysis
+                to help you make timely entries and exits.
+              </li>
+              <li>
+                <strong>Hammer Candlestick Patterns:</strong> Explore the
+                intricacies of candlestick patterns like the hammer. Learn how
+                to recognize potential trend reversals and optimize your trading
+                strategies.
+              </li>
+              <li>
+                <strong>2% Upward Movement:</strong> Capitalize on stocks that
+                have shown a significant upward movement. Discover how a 2% gain
+                can be a potential trigger for profitable trades.
+              </li>
+            </ul>
+
+            <h3>2. In-Depth Insights</h3>
+            <p>
+              Dive deep into the technicalities of each strategy with our
+              comprehensive guides and explanations. We break down the
+              methodologies behind these strategies, ensuring you have a clear
+              understanding of how they work and when to apply them.
+            </p>
+
+            <h3>3. Real-Time Data</h3>
+            <p>
+              Access real-time and historical data for thousands of stocks,
+              including NSE-listed companies. Stay updated with the latest
+              market trends, news, and financial information.
+            </p>
+
+            <h3>4. Customized Alerts</h3>
+            <p>
+              Receive alerts and notifications tailored to your preferred
+              strategies and stock preferences. Never miss an opportunity to
+              make a well-informed trade.
+            </p>
+
+            <h3>5. IPO and Stock News</h3>
+            <p>
+              Stay ahead of the curve with the latest news on initial public
+              offerings (IPOs) and trending stocks. Our platform aggregates news
+              from reliable sources to keep you informed about market movers and
+              shakers.
+            </p>
+          </section>
+
+          <section id="section3">
+            <h2>Our Mission</h2>
+            <p>
+              At StockGrow, we're committed to empowering traders and investors
+              with the knowledge and tools they need to succeed in the dynamic
+              world of stock trading. Our mission is to make stock market
+              analysis more accessible, helping you grow your wealth and achieve
+              financial success.
+            </p>
+          </section>
+
+          <section id="section4">
+            <h2>Get Started with StockGrow</h2>
+            <p>
+              Join StockGrow today and embark on a journey to sharpen your
+              trading skills, test your strategies, and gain a competitive edge
+              in the stock market. Start making informed decisions, and watch
+              your investments grow.
+            </p>
+            <p>
+              <em>Experience the Future of Stock Trading with StockGrow!</em>
+            </p>
+          </section>
+
+          <footer>
+            <p>&copy; 2023 StockGrow. All rights reserved.</p>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

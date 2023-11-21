@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--  Font awesome -->
+    <script
+      src="https://kit.fontawesome.com/fef1043eff.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google font styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />\
+    <!-- Jquery CDN -->
+
+
+    <title>IPO</title>
+
+    <style>
+        .container {
+        display: grid;
+        grid-template-rows: 100px auto auto auto;
+        grid-template-columns: auto auto auto auto;
+        column-gap: 10px;
+        row-gap: 2px;
+        width: fit-content;
+        font-family: "Poppins", sans-serif;
+      }
+      .sidebar {
+        grid-row-start: 1;
+        grid-row-end: 5;
+        grid-column-start: 1;
+        grid-column-end: 2;
+      }
+      .navbar-home {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 2;
+        grid-column-end: 4;
+      }
+      .ipoList-container {
+        background-color: white;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.21),
+          -2px -2px 6px rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        margin-left: 15px;
+        grid-row-start: 2;
+        grid-row-end: 5;
+        grid-column-start: 2;
+        grid-column-end: 4;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+
+      .page-loader {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        background: transparent;
+        z-index: 1000;
+        .txt {
+          color: #2b3674;
+          text-align: center;
+          top: 40%;
+          position: relative;
+          text-transform: uppercase;
+          letter-spacing: 0.3rem;
+          font-weight: bold;
+          line-height: 1.5;
+        }
+      }
+
+      /* Spinner animation */
+      .spinner {
+        position: relative;
+        top: 35%;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        background-color: #2b3674;
+        border-radius: 100%;
+        -webkit-animation: sk-scaleout 1s infinite ease-in-out;
+        animation: sk-scaleout 1s infinite ease-in-out;
+      }
+
+      @-webkit-keyframes sk-scaleout {
+        0% {
+          -webkit-transform: scale(0);
+        }
+        100% {
+          -webkit-transform: scale(1);
+          opacity: 0;
+        }
+      }
+
+      @keyframes sk-scaleout {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        100% {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+          opacity: 0;
+        }
+      }
+    </style>
+</head>
+<body onload="hideLoader()">
+  <div class="page-loader">
+    <div class="spinner"></div>
+    <div class="txt">Loading...</div>
+  </div>
+  <div class="container">
+    <div class="sidebar">{% include 'Sidebar.html' %}</div>
+    <div class="navbar-home">{% include 'Navbar.html'%}</div>
+    <div class="ipoList-container">
+      {{table|safe}}
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+  function hideLoader() {
+    $(".page-loader").fadeOut("slow");
+  }
+</script>
+</html>

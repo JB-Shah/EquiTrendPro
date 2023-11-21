@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--  Font awesome -->
+    <script
+      src="https://kit.fontawesome.com/fef1043eff.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google font styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <title>Virtual Trade</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-rows: 100px auto auto auto auto;
+        grid-template-columns: auto auto auto auto;
+        column-gap: 10px;
+        row-gap: 2px;
+        width: fit-content;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .sidebar {
+        grid-row-start: 1;
+        grid-row-end: 5;
+        grid-column-start: 1;
+        grid-column-end: 2;
+      }
+
+      .navbar-home {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 2;
+        grid-column-end: 4;
+      }
+
+      .stock-trade-container {
+        /* z-index: -2; */
+        font-family: "Poppins", sans-serif;
+        position: absolute;
+        display: none;
+        height: 100%;
+        width: 100%;
+      }
+      .stock-trade-form-container {
+        position: absolute;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 500px;
+        top: 207px;
+        left: 490px;
+        height: fit-content;
+        padding: 10px 10px 30px 10px;
+
+      }
+
+      .stock-trade-form-container input {
+        border-radius: 2px;
+        width: 100px;
+        height: 24px;
+      }
+      /* .form-container button {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .form-container button {
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+      } */
+      .stock-trade-heading {
+        display: flex;
+        justify-content: space-between;
+      }
+      .stock-trade-heading i {
+        padding: 22px;
+        font-size: 28px;
+        color: #2b3674;
+      }
+      .stock-trade-form {
+        display: grid;
+        grid-template-rows: auto auto auto auto;
+        grid-template-columns: auto auto;
+        row-gap: 20px;
+      }
+      .stock-symbol-div{
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 2; 
+      }
+      .stock-action-div{
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 2;
+        grid-column-end: 3; 
+      }
+      .stock-trade-form button{
+        grid-row-start: 4;
+        grid-row-end: 5;
+        grid-column-start: 1;
+        grid-column-end: 3;     
+      }
+
+      .stock-trade-form div div {
+        font-weight: 600;
+        color: #2b3674;
+        font-size: 20px;
+      }
+
+      .stock-trade-form-container button {
+        text-decoration: none;
+        font-size: 17px;
+        text-align: center;
+        width: inherit;
+        height: 35px;
+        color: white;
+        background-color: #4987ee;
+        border: 1px solid #2b3674;
+        border-radius: 8px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .vt_container {
+        background-color: white;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.21),
+          -2px -2px 6px rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        margin-left: 15px;
+        grid-row-start: 2;
+        grid-row-end: 5;
+        grid-column-start: 2;
+        grid-column-end: 4;
+        color: #2b3674;
+      }
+
+      .top-line-left {
+        display: flex;
+        margin-left: 10px;
+        margin-top: 10px;
+        gap: 10px;
+        position: relative;
+      }
+
+      .top-line-left i {
+        font-size: 17px;
+        cursor: pointer;
+      }
+
+      .top-line-left span {
+        font-size: medium;
+        font-weight: bolder;
+        cursor: pointer;
+      }
+
+      .stock-list-container {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 563px;
+        margin-left: 10px;
+        margin-top: 10px;
+      }
+
+      #search-stock {
+        display: none;
+        justify-content: left;
+        text-transform: uppercase;
+        width: 256px;
+      }
+
+      .vt-stock {
+        height: max-content;
+        font-weight: 900;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .vt-stock-actions {
+        visibility: hidden;
+      }
+
+      .vt-stock:hover .vt-stock-actions {
+        visibility: visible;
+      }
+
+      button {
+        text-decoration: none;
+        font-size: 17px;
+        margin-inline-end: 15px;
+        text-align: center;
+        width: 50px;
+        height: 30px;
+        font-weight: 600;
+      }
+
+      .buy-btn {
+        background-color: #4184f3;
+        border-color: #4184f3;
+        color: white;
+      }
+
+      .sell-btn {
+        background-color: #ff5722;
+        border-color: #ff5722;
+        color: white;
+      }
+
+      .chart-btn {
+        background-color: transparent;
+        border-color: #a3aed0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="stock-trade-container" id="stock-trade-container">
+      <form class="stock-trade-form-container" method="POST">
+        {% csrf_token %}
+        <div class="stock-trade-heading">
+          <h2 id="stock-name" name="{{stock.symbol}}"></h2>
+          <i class="fa-solid fa-xmark" onclick="clearAndHideSTWindow()"></i>
+        </div>
+        <hr />
+        <div class="stock-trade-form">
+          <div class="stock-symbol-div">
+            <input type="text" id="stock-symbol-input" name="stock_symbol"/>
+          </div>
+          <div class="stock-action-div">
+            <input type="text" id="stock-action-input" name="stock_action"/>
+          </div>
+          <div>
+            <div>Quantity:</div>
+            <input type="number" step="1" id= "quantity" required name="quantity"/>
+          </div>
+          <div>
+            <div>Price:</div>
+            <input type="number" step="0.01" id="price" required name="price"/>
+          </div>
+          <div>
+            <div>Target:</div>
+            <input type="number" step="0.01" id="target" required name="target"/>
+          </div>
+          <div>
+            <div>Stoploss:</div>
+            <input type="number" step="0.01"  id="stoploss" required name="stoploss"/>
+          </div>
+          <button type="submit" onclick="hideSTWindow()">EXECUTE TRADE</button>
+        </div>
+      </form>
+    </div>
+    <div class="container">
+      <div class="sidebar">{% include 'Sidebar.html' %}</div>
+      <div class="navbar-home">{% include 'Navbar.html'%}</div>
+      <div class="vt_container">
+        <div class="top-line">
+          <div class="top-line-left">
+            <div class="filter-icon">
+              <i class="fa-solid fa-filter"></i><span> Fitler</span>
+            </div>
+            <div class="search-icon" onclick="displaySearchBar()">
+              <i
+                onclick="searchStock()"
+                class="fa-solid fa-magnifying-glass"
+              ></i
+              ><span id="search_icon"> Search</span>
+            </div>
+            <input
+              type="text"
+              name=""
+              id="search-stock"
+              placeholder="Search eg. infy,reliance"
+            />
+          </div>
+        </div>
+        <hr />
+        <div class="stock-list-container">
+          {% for stock in stocks %}
+          <div class="vt-stock">
+            <div class="vt-stock-info">
+              {{stock.stock_name}} <span>({{stock.symbol}})</span>
+            </div>
+            <div class="vt-stock-actions" id="vt-stock-actions">
+              <button
+                class="buy-btn"
+                onclick="displaySTWindow('{{stock.symbol}}','buy')"
+              >
+                B
+              </button>
+              <button
+                class="sell-btn"
+                onclick="displaySTWindow('{{stock.symbol}}','sell')"
+              >
+                S
+              </button>
+              <button class="chart-btn">
+                <a
+                  target="_blank"
+                  href="https://in.tradingview.com/chart/XAEVDngh/?symbol={{stock.symbol}}"
+                >
+                  <i class="fa-solid fa-arrow-trend-up"></i>
+                </a>
+              </button>
+            </div>
+          </div>
+          <hr />
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+
+    function displaySearchBar() {
+      document.getElementById("search-stock").style.display = "block";
+      document.getElementById("search_icon").style.display = "none";
+    }
+    function searchStock() {
+      var search = document.getElementById("search-stock");
+      var search_value = document.getElementById("search-stock").value;
+      var search_value = document.getElementById("search-stock").value;
+      location.replace(`http://127.0.0.1:9000/virtual_trade/${search_value}`);
+    }
+    function displaySTWindow(symbol,action) {
+      stock_symbol= symbol
+      stcontainer = document.getElementById("stock-trade-container");
+      stcontainer.style.backgroundColor = "rgba(0,0,0,0.5)";
+      document.getElementById("stock-name").innerText = stock_symbol;
+      stcontainer.style.display = "block";
+      document.getElementById("stock-symbol-input").placeholder = stock_symbol
+      document.getElementById("stock-symbol-input").value = stock_symbol
+
+
+      if(action == 'buy')
+      {
+        document.getElementById("stock-action-input").placeholder = "BUY"
+        document.getElementById("stock-action-input").value = "BUY"
+      }
+      if(action == 'sell')
+      {
+        document.getElementById("stock-action-input").placeholder = "SELL"
+        document.getElementById("stock-action-input").value = "SELL"
+      }
+ 
+      
+    }
+    function hideSTWindow() {
+      stcontainer = document.getElementById("stock-trade-container");
+      stcontainer.style.display = "none";
+
+    }
+    function clearAndHideSTWindow(){
+      stcontainer = document.getElementById("stock-trade-container");
+      stcontainer.style.display = "none";
+      document.getElementById("quantity").value=''
+      document.getElementById("price").value=''
+      document.getElementById("target").value=''
+      document.getElementById("stoploss").value=''
+    }
+  </script>
+</html>

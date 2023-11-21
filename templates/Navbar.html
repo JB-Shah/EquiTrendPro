@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Filter</title>
+    <!--  Font awesome -->
+    <script
+      src="https://kit.fontawesome.com/fef1043eff.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google font styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Autocomplete Search -->
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
+
+    <style>
+      nav {
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.21),
+          -2px -2px 6px rgba(0, 0, 0, 0.3);
+      }
+      .navbar {
+        background: #ffffff;
+        /* background-color: #2B2B2B; */
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 30px 0 10px;
+        border-bottom: 1px solid lightgray;
+        font-family: "Poppins", sans-serif;
+        margin-top: 20px;
+        border-radius: 15px;
+        width: 72vw;
+        margin-left: 15px;
+      }
+      .navbar__left > p {
+        display: inline;
+        margin-right: 30px;
+        text-decoration: none;
+        color: #2b3674;
+        /* color: white; */
+        font-size: 30px;
+        font-weight: 700;
+      }
+      .navbar__left > i {
+        font-size: 26px;
+        padding-right: 5px;
+        color: #a3aed0;
+        /* color: #A3BED0; */
+      }
+
+      .navbar__left .active_link {
+        color: #265acc;
+        border-bottom: 3px solid #265acc;
+        padding-bottom: 12px;
+      }
+      input {
+        border: 1px solid black;
+        border-radius: 15px;
+        margin-left: 5px;
+        height: 20px;
+        padding-left: 5vw;
+        font-weight: bold;
+      }
+      .navbar__right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .navbar__right > a {
+        margin-left: 20px;
+        text-decoration: none;
+      }
+
+      .navbar__right > a > i {
+        color: #a3aed0;
+        /* color: #A3BED0; */
+        font-size: 16px;
+        border-radius: 50px;
+        background: white;
+        box-shadow: 2px 2px 5px #d9d9d9, -2px -2px 5px #ffffff;
+        padding: 7px;
+      }
+      /* dropdown Styling */
+      .custom-select {
+        position: relative;
+        display: inline-block;
+        width: 200px;
+        margin: 20px;
+      }
+
+      .custom-select select {
+        width: 100%;
+        padding: 10px;
+        appearance: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #265acc;
+        font-size: 16px;
+        outline: none;
+        color: white;
+        font-weight: bold;
+      }
+
+      /* Custom Dropdown Arrow */
+      .custom-select::after {
+        content: "\25BC"; /* Unicode character for down arrow */
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: white;
+      }
+
+      /* Styling when the dropdown is active */
+      .custom-select select:focus {
+        border-color: #a5aaad;
+      }
+
+      /* Styling for options */
+      .custom-select select option {
+        background-color: #fff;
+        color: #265acc;
+        font-weight: bold;
+        font-size: 18px;
+        border: 1px solid #ccc;
+        /* top: 10px; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <div class="navbar__left">
+          {% if title == "Strategy Testing"%}
+          <i class="fa-solid fa-bullseye"></i>
+          {% elif title == "Home"%}
+          <i class="fa fa-home"></i>
+          {% elif title == "Stocks In News"%}
+          <i class="fa-solid fa-newspaper"></i>
+          {% elif title == "IPO"%}
+          <i class="fa-solid fa-money-check"></i>
+          {% elif title == "About"%}
+          <i class="fa-solid fa-address-card"></i>
+          {% elif title == "Portfolio"%}
+          <i class="fa-solid fa-envelope"></i>
+          {% elif title == "VirtualTrade" %}
+          <i class="fa-solid fa-arrow-trend-up"></i>
+          {% endif %}
+          <p>{{title}}</p>
+          <!-- {% if strategy == "rsi_14"%}
+          <h4 id="rsi_14"> > rsi_14</h4>
+          {% elif strategy == "2percent"%}
+          <h4 id=""> > 2percent</h4>
+          {% elif strategy == "sma_44"%}
+          <h4 id="{{strategy}}"> > sma_44</h4>
+          {% else %}
+          <h4></h4>
+          {% endif %} -->
+        </div>
+
+        <div class="navbar__right">
+          {%if title == "Strategy Testing"%}
+          <form method="POST">
+            {% csrf_token %}
+
+            <input
+              type="text"
+              placeholder="Search"
+              style="text-transform: uppercase"
+              id="#search"
+              oninput="getSelectedOption()"
+            />
+          </form>
+
+          <div class="custom-select">
+            <select onchange="getSelectedOption()" id="select_strategy">
+              <option value="" selected disabled>Strategy</option>
+              <option value="rsi_14">RSI 14</option>
+              <option value="sma_44">SMA 44</option>
+            </select>
+          </div>
+          {% endif %}
+          <a href="" id="strategy-run-btn">
+            {%if title == "Strategy Testing"%}
+            <i class="fa-solid fa-play"></i>
+            {% endif %}
+          </a>
+          <a href="#">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+          </a>
+          <a href="#">
+            <!-- <img width="30" src="assets/avatar.svg" alt="" /> -->
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </body>
+  <script type="text/javascript">
+    var strategy_option = "";
+    function getSelectedOption() {
+      // let so = document.getElementsByTagName("h4").id
+      selectElement = document.querySelector("#select_strategy");
+      strategy_option = selectElement.value;
+      localStorage.setItem("so", strategy_option);
+      // selectElement.options[1].setAttribute('selected',true)
+      // const so= strategy_option
+      var anchor = document.getElementById("strategy-run-btn");
+      let input_value = document.getElementById("#search").value;
+      let search_value = "";
+      if (input_value == "") {
+        search_value = "all";
+      } else {
+        search_value = input_value;
+      }
+      console.log(input_value);
+      anchor.setAttribute(
+        "href",
+        `http://127.0.0.1:9000/Strategy_Testing/${localStorage.getItem(
+          "so"
+        )}/search^${search_value}`
+      );
+    }
+    // function searching(){
+    //   console.log();
+    // }
+  </script>
+</html>

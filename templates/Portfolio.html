@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--  Font awesome -->
+    <script
+      src="https://kit.fontawesome.com/fef1043eff.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google font styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <title>Portfolio</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-rows: 100px auto auto auto auto;
+        grid-template-columns: auto auto auto auto;
+        column-gap: 10px;
+        row-gap: 2px;
+        width: fit-content;
+        font-family: "Poppins", sans-serif;
+      }
+      .sidebar {
+        grid-row-start: 1;
+        grid-row-end: 5;
+        grid-column-start: 1;
+        grid-column-end: 2;
+      }
+      .navbar-home {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 2;
+        grid-column-end: 4;
+      }
+      .portfolio_container{
+        grid-row-start: 2;
+        grid-row-end: 5;
+        grid-column-start: 2;
+        grid-column-end: 4;
+        background-color: black;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.21),
+          -2px -2px 6px rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        display: flex;
+        flex-direction: row;
+
+      }
+      .portfolio_container-left {
+        background-color: white;
+        /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.21),
+          -2px -2px 6px rgba(0, 0, 0, 0.3);
+        border-radius: 15px; */
+        border-bottom-left-radius: 15px;
+        border-top-left-radius: 15px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 596px;
+        padding: 10px 0;
+        width: 613px;
+      }
+      .portfolio_container-left::-webkit-scrollbar {
+        display: none;
+      }
+      .portfolio_stock {
+        width: 50%;
+        color: #2b3674;
+        display: grid;
+        grid-template-rows: auto auto auto;
+        grid-template-columns: 312px 116px;
+        margin-left: 15px;
+      }
+      .qty {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        font-size: 9px;
+      }
+      .symbol {
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 2;
+        font-size: 17px;
+      }
+      .ltp {
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        font-size: 17px;
+        text-align: left;
+      }
+      .invested-amt {
+        grid-row-start: 3;
+        grid-row-end: 4;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        font-size: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">{% include 'Sidebar.html' %}</div>
+      <div class="navbar-home">{% include 'Navbar.html'%}</div>
+      <div class="portfolio_container">
+        <div class="portfolio_container-left">
+          {% for stock in portfolio_stocks%}
+          <div class="portfolio_stock">
+            <div class="qty">Qty. {{stock.quantity}}</div>
+            <div class="symbol">{{stock.symbol}}</div>
+            <div class="ltp">{{stock.ltp}}</div>
+            <div class="invested-amt">Invested: {{stock.invested_amt}}</div>
+          </div>
+          <hr />
+          {% endfor %}
+        </div>
+        <div class="portfolio_container-right">
+          <!-- {% for stock in portfolio_stocks%}
+          <div class="portfolio_stock">
+            <div class="qty">Qty. {{stock.quantity}}</div>
+            <div class="symbol">{{stock.symbol}}</div>
+            <div class="ltp">{{stock.ltp}}</div>
+            <div class="invested-amt">Invested: {{stock.invested_amt}}</div>
+          </div>
+          <hr />
+          {% endfor %} -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
